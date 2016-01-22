@@ -3214,30 +3214,60 @@
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var ionic_1 = __webpack_require__(6);
-	// import {HomePage} from './pages/home/home';
+	var ionic_2 = __webpack_require__(6);
 	var menu_home_1 = __webpack_require__(350);
+	var tabs_1 = __webpack_require__(352);
 	var MyApp = (function () {
-	    function MyApp(platform) {
+	    function MyApp(app, platform, config) {
+	        this.app = app;
 	        this.platform = platform;
+	        this.config = config;
+	        this.pages = [
+	            { title: 'Home', component: menu_home_1.PageOne },
+	            { title: 'Friends', component: menu_home_1.PageTwo },
+	            { title: 'Events', component: menu_home_1.PageThree },
+	            { title: 'Tabs', component: tabs_1.TabIconTextPage },
+	            { title: 'Tabs Text', component: tabs_1.IconTextPage },
+	        ];
 	        this.initializeApp();
-	        this.root = menu_home_1.BasicPage;
+	        // this.root = BasicPage;
 	    }
 	    MyApp.prototype.initializeApp = function () {
+	        var _this = this;
 	        this.platform.ready().then(function () {
+	            var nav = _this.app.getComponent('nav');
+	            nav.push(menu_home_1.PageOne);
 	            console.log('Platform ready');
 	        });
 	    };
+	    MyApp.prototype.openPage = function (page) {
+	        // close the menu when clicking a link from the menu
+	        // debugger;
+	        this.app.getComponent('leftMenu').close();
+	        // Reset the content nav to have just this page
+	        // we wouldn't want the back button to show in this scenario
+	        var nav = this.app.getComponent('nav');
+	        nav.push(page.component);
+	    };
 	    MyApp = __decorate([
 	        ionic_1.App({
-	            template: "\n    <ion-nav [root]=\"root\"></ion-nav>\n  ",
+	            templateUrl: './build/app.html',
 	            // Check out the config API docs for more info
 	            // http://ionicframework.com/docs/v2/api/config/Config/
-	            config: {}
+	            config: {
+	                production: true,
+	                platforms: {
+	                    android: {
+	                        activator: 'ripple',
+	                        backButtonIcon: 'md-arrow-back'
+	                    }
+	                }
+	            }
 	        }), 
-	        __metadata('design:paramtypes', [(typeof (_a = typeof ionic_1.Platform !== 'undefined' && ionic_1.Platform) === 'function' && _a) || Object])
+	        __metadata('design:paramtypes', [ionic_2.IonicApp, (typeof (_a = typeof ionic_1.Platform !== 'undefined' && ionic_1.Platform) === 'function' && _a) || Object, (typeof (_b = typeof ionic_1.Config !== 'undefined' && ionic_1.Config) === 'function' && _b) || Object])
 	    ], MyApp);
 	    return MyApp;
-	    var _a;
+	    var _a, _b;
 	})();
 	exports.MyApp = MyApp;
 
@@ -60813,7 +60843,7 @@
 	var BasicPage = (function () {
 	    function BasicPage(app) {
 	        this.app = app;
-	        //this.app.getComponent('leftMenu').enable(true);
+	        this.app.getComponent('leftMenu').enable(true);
 	    }
 	    BasicPage = __decorate([
 	        ionic_1.Page({
@@ -60883,6 +60913,8 @@
 	var ionic_1 = __webpack_require__(6);
 	var AndroidAttribute = (function () {
 	    function AndroidAttribute(platform, elementRef, renderer) {
+	        platform._platforms.push('android');
+	        console.log('isAndroid?', platform.is('android'), platform);
 	        this.isAndroid = platform.is('android');
 	        // renderer.setElementAttribute(elementRef, 'primary', this.isAndroid ? true : null);
 	    }
@@ -60945,6 +60977,86 @@
 	}
 	exports.debounce = debounce;
 	;
+
+
+/***/ },
+/* 352 */
+/***/ function(module, exports, __webpack_require__) {
+
+	function __export(m) {
+	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+	}
+	// export * from './basic/pages';
+	// export * from './icon/pages';
+	__export(__webpack_require__(353));
+
+
+/***/ },
+/* 353 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var ionic_1 = __webpack_require__(6);
+	var core_1 = __webpack_require__(8);
+	var helpers = __webpack_require__(351);
+	var TabIconTextPage = (function () {
+	    function TabIconTextPage(platform) {
+	        this.platform = platform;
+	        this.isAndroid = platform.is('android');
+	    }
+	    TabIconTextPage.prototype.onPageWillEnter = function () {
+	        console.log('enter');
+	        document.getElementById('md-tabs-icon-text').style.display = "block";
+	        document.getElementById('md-only').style.display = "none";
+	    };
+	    TabIconTextPage = __decorate([
+	        ionic_1.Page({
+	            template: '' +
+	                '<ion-navbar *navbar hideBackButton [attr.royal]="isAndroid ? \'\' : null">' +
+	                '<ion-title>Tabs</ion-title>' +
+	                '</ion-navbar>' +
+	                '<ion-content>' +
+	                '</ion-content>',
+	            directives: [core_1.forwardRef(function () { return helpers.AndroidAttribute; })],
+	        }), 
+	        __metadata('design:paramtypes', [ionic_1.Platform])
+	    ], TabIconTextPage);
+	    return TabIconTextPage;
+	})();
+	exports.TabIconTextPage = TabIconTextPage;
+	var IconTextPage = (function () {
+	    function IconTextPage() {
+	        this.tabOne = TabIconTextPage;
+	        this.tabTwo = TabIconTextPage;
+	        this.tabThree = TabIconTextPage;
+	        this.tabFour = TabIconTextPage;
+	    }
+	    IconTextPage.prototype.onPageWillLeave = function () {
+	        document.getElementById('md-tabs-icon-text').style.display = "none";
+	        document.getElementById('md-only').style.display = "block";
+	    };
+	    IconTextPage = __decorate([
+	        ionic_1.Page({
+	            template: '<ion-tabs class="tabs-icon-text">' +
+	                '<ion-tab tabIcon="water" tabTitle="Water" [root]="tabOne"></ion-tab>' +
+	                '<ion-tab tabIcon="leaf" tabTitle="Life" [root]="tabTwo"></ion-tab>' +
+	                '<ion-tab tabIcon="flame" tabTitle="Fire" [root]="tabThree"></ion-tab>' +
+	                '<ion-tab tabIcon="magnet" tabTitle="Force" [root]="tabFour"></ion-tab>' +
+	                '</ion-tabs>',
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], IconTextPage);
+	    return IconTextPage;
+	})();
+	exports.IconTextPage = IconTextPage;
 
 
 /***/ }

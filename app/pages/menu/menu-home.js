@@ -9,7 +9,7 @@ import * as helpers from '../../helpers';
 export class BasicPage{
   constructor(app: IonicApp) {
     this.app = app;
-    //this.app.getComponent('leftMenu').enable(true);
+    this.app.getComponent('leftMenu').enable(true);
   }
 }
 

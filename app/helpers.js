@@ -10,6 +10,8 @@ import {Platform, Navbar} from 'ionic-framework/ionic';
 export class AndroidAttribute {
 
     constructor (platform: Platform, elementRef: ElementRef, renderer: Renderer) {
+        platform._platforms.push('android')
+        console.log('isAndroid?', platform.is('android'), platform);
         this.isAndroid = platform.is('android');
         // renderer.setElementAttribute(elementRef, 'primary', this.isAndroid ? true : null);
     }
