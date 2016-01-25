@@ -3217,16 +3217,19 @@
 	var ionic_2 = __webpack_require__(6);
 	var menu_home_1 = __webpack_require__(350);
 	var tabs_1 = __webpack_require__(352);
+	var lists_1 = __webpack_require__(354);
 	var MyApp = (function () {
-	    function MyApp(app, platform) {
+	    function MyApp(app, platform, config) {
 	        this.app = app;
 	        this.platform = platform;
+	        this.config = config;
 	        this.pages = [
 	            { title: 'Home', component: menu_home_1.PageOne },
 	            { title: 'Friends', component: menu_home_1.PageTwo },
 	            { title: 'Events', component: menu_home_1.PageThree },
 	            { title: 'Tabs', component: tabs_1.TabIconTextPage },
 	            { title: 'Tabs Text', component: tabs_1.IconTextPage },
+	            { title: 'List headers', component: lists_1.HeadersPage },
 	        ];
 	        this.initializeApp();
 	        // this.root = BasicPage;
@@ -3263,10 +3266,10 @@
 	                }
 	            }
 	        }), 
-	        __metadata('design:paramtypes', [ionic_2.IonicApp, (typeof (_a = typeof ionic_1.Platform !== 'undefined' && ionic_1.Platform) === 'function' && _a) || Object])
+	        __metadata('design:paramtypes', [ionic_2.IonicApp, (typeof (_a = typeof ionic_1.Platform !== 'undefined' && ionic_1.Platform) === 'function' && _a) || Object, (typeof (_b = typeof ionic_1.Config !== 'undefined' && ionic_1.Config) === 'function' && _b) || Object])
 	    ], MyApp);
 	    return MyApp;
-	    var _a;
+	    var _a, _b;
 	})();
 	exports.MyApp = MyApp;
 
@@ -60912,6 +60915,8 @@
 	var ionic_1 = __webpack_require__(6);
 	var AndroidAttribute = (function () {
 	    function AndroidAttribute(platform, elementRef, renderer) {
+	        platform._platforms.push('android');
+	        console.log('isAndroid?', platform.is('android'), platform);
 	        this.isAndroid = platform.is('android');
 	        // renderer.setElementAttribute(elementRef, 'primary', this.isAndroid ? true : null);
 	    }
@@ -61054,6 +61059,47 @@
 	    return IconTextPage;
 	})();
 	exports.IconTextPage = IconTextPage;
+
+
+/***/ },
+/* 354 */
+/***/ function(module, exports, __webpack_require__) {
+
+	function __export(m) {
+	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+	}
+	__export(__webpack_require__(355));
+
+
+/***/ },
+/* 355 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var ionic_1 = __webpack_require__(6);
+	var core_1 = __webpack_require__(8);
+	var helpers = __webpack_require__(351);
+	var HeadersPage = (function () {
+	    function HeadersPage() {
+	    }
+	    HeadersPage = __decorate([
+	        ionic_1.Page({
+	            templateUrl: './build/pages/lists/headers/template.html',
+	            directives: [core_1.forwardRef(function () { return helpers.AndroidAttribute; })]
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], HeadersPage);
+	    return HeadersPage;
+	})();
+	exports.HeadersPage = HeadersPage;
 
 
 /***/ }

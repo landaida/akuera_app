@@ -2,7 +2,6 @@ import {NavController, NavParams} from 'ionic-framework/ionic';
 import {Page, ViewController, Platform} from 'ionic-framework/ionic';
 import {forwardRef} from 'angular2/core';
 import * as helpers from '../../../helpers';
-
 @Page({
   template: '' +
   '<ion-navbar *navbar hideBackButton [attr.royal]="isAndroid ? \'\' : null">' +

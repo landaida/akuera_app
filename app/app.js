@@ -10,6 +10,7 @@ import {App, Platform, Config} from 'ionic/ionic';
 import {Page, Config, Events} from 'ionic-framework/ionic';
 import {PageOne, PageTwo, PageThree} from './pages/menu/menu-home';
 import {TabIconTextPage, IconTextPage} from './pages/tabs/tabs';
+import {HeadersPage, HeadersPage} from './pages/lists/lists';
 import * as actionSheets from './action-sheets/action-sheets';
 
 
@@ -31,8 +32,8 @@ import * as actionSheets from './action-sheets/action-sheets';
 export class MyApp {
   rootPage: any;
   androidAttribute: any;
-  constructor(app: IonicApp, platform: Platform, config: Config) {
-
+  constructor(nav: NavController, app: IonicApp, platform: Platform, config: Config) {
+    this.nav = nav;
     this.app = app;
     this.platform = platform;
     this.config = config;
@@ -42,6 +43,7 @@ export class MyApp {
       { title: 'Events', component: PageThree },
       { title: 'Tabs', component: TabIconTextPage },
       { title: 'Tabs Text', component: IconTextPage },
+      { title: 'List headers', component: HeadersPage },
     ];
 
     this.initializeApp();
@@ -68,6 +70,6 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     let nav = this.app.getComponent('nav');
-    nav.push(page.component);
+    nav.push(page.component, { name: page.title });
   }
 }
