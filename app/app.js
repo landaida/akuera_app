@@ -6,12 +6,13 @@ import {App, Platform, Config} from 'ionic/ionic';
 
 
 
- import {App, IonicApp, Platform, ActionSheet} from 'ionic-framework/ionic';
+ import {App, IonicApp, Platform, ActionSheet, } from 'ionic-framework/ionic';
 import {Page, Config, Events} from 'ionic-framework/ionic';
 import {PageOne, PageTwo, PageThree} from './pages/menu/menu-home';
 import {TabIconTextPage, IconTextPage} from './pages/tabs/tabs';
 import {HeadersPage, HeadersPage} from './pages/lists/lists';
 import * as actionSheets from './action-sheets/action-sheets';
+import {NavigationDetailsPage, BasicPage} from './pages/navigation/navigation';
 
 
 @App({
@@ -32,8 +33,8 @@ import * as actionSheets from './action-sheets/action-sheets';
 export class MyApp {
   rootPage: any;
   androidAttribute: any;
-  constructor(nav: NavController, app: IonicApp, platform: Platform, config: Config) {
-    this.nav = nav;
+  constructor(app: IonicApp, platform: Platform, config: Config) {
+
     this.app = app;
     this.platform = platform;
     this.config = config;
@@ -44,6 +45,7 @@ export class MyApp {
       { title: 'Tabs', component: TabIconTextPage },
       { title: 'Tabs Text', component: IconTextPage },
       { title: 'List headers', component: HeadersPage },
+      { title: 'Navigation', component: BasicPage },
     ];
 
     this.initializeApp();

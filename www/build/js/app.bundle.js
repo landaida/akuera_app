@@ -3218,9 +3218,9 @@
 	var menu_home_1 = __webpack_require__(350);
 	var tabs_1 = __webpack_require__(352);
 	var lists_1 = __webpack_require__(354);
+	var navigation_1 = __webpack_require__(356);
 	var MyApp = (function () {
-	    function MyApp(nav, app, platform, config) {
-	        this.nav = nav;
+	    function MyApp(app, platform, config) {
 	        this.app = app;
 	        this.platform = platform;
 	        this.config = config;
@@ -3231,6 +3231,7 @@
 	            { title: 'Tabs', component: tabs_1.TabIconTextPage },
 	            { title: 'Tabs Text', component: tabs_1.IconTextPage },
 	            { title: 'List headers', component: lists_1.HeadersPage },
+	            { title: 'Navigation', component: navigation_1.BasicPage },
 	        ];
 	        this.initializeApp();
 	        // this.root = BasicPage;
@@ -3267,7 +3268,7 @@
 	                }
 	            }
 	        }), 
-	        __metadata('design:paramtypes', [Object, ionic_2.IonicApp, (typeof (_a = typeof ionic_1.Platform !== 'undefined' && ionic_1.Platform) === 'function' && _a) || Object, (typeof (_b = typeof ionic_1.Config !== 'undefined' && ionic_1.Config) === 'function' && _b) || Object])
+	        __metadata('design:paramtypes', [ionic_2.IonicApp, (typeof (_a = typeof ionic_1.Platform !== 'undefined' && ionic_1.Platform) === 'function' && _a) || Object, (typeof (_b = typeof ionic_1.Config !== 'undefined' && ionic_1.Config) === 'function' && _b) || Object])
 	    ], MyApp);
 	    return MyApp;
 	    var _a, _b;
@@ -61101,6 +61102,80 @@
 	    return HeadersPage;
 	})();
 	exports.HeadersPage = HeadersPage;
+
+
+/***/ },
+/* 356 */
+/***/ function(module, exports, __webpack_require__) {
+
+	function __export(m) {
+	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+	}
+	__export(__webpack_require__(357));
+
+
+/***/ },
+/* 357 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var ionic_1 = __webpack_require__(6);
+	var ionic_2 = __webpack_require__(6);
+	var core_1 = __webpack_require__(8);
+	var helpers = __webpack_require__(351);
+	var NavigationDetailsPage = (function () {
+	    function NavigationDetailsPage(nav, params) {
+	        this.nav = nav;
+	        this.selection = { title: params.data.name };
+	        var navData = {
+	            'Angular': "A powerful Javascript framework for building single page apps. Angular is open source, and maintained by Google.",
+	            'CSS3': "The latest version of cascading stylesheets - the styling language of the web!",
+	            'HTML5': "The latest version of the web's markup language.",
+	            'Sass': "Syntactically Awesome Stylesheets - a mature, stable, and powerful professional grade CSS extension."
+	        };
+	        var navIcons = {
+	            'Angular': 'ion-social-angular',
+	            'CSS3': 'ion-social-css3',
+	            'HTML5': 'ion-social-html5',
+	            'Sass': 'ion-social-sass'
+	        };
+	        this.selection['content'] = navData[this.selection.title];
+	        this.selection['icon'] = navIcons[this.selection.title];
+	    }
+	    NavigationDetailsPage = __decorate([
+	        ionic_2.Page({
+	            templateUrl: './build/pages/navigation/basic/navigation-details.html',
+	            directives: [core_1.forwardRef(function () { return helpers.AndroidAttribute; })]
+	        }), 
+	        __metadata('design:paramtypes', [ionic_1.NavController, ionic_1.NavParams])
+	    ], NavigationDetailsPage);
+	    return NavigationDetailsPage;
+	})();
+	var BasicPage = (function () {
+	    function BasicPage(nav) {
+	        this.nav = nav;
+	    }
+	    BasicPage.prototype.openNavDetailsPage = function (item) {
+	        this.nav.push(NavigationDetailsPage, { name: item });
+	    };
+	    BasicPage = __decorate([
+	        ionic_2.Page({
+	            templateUrl: './build/pages/navigation/basic/navigation.html',
+	            directives: [core_1.forwardRef(function () { return helpers.AndroidAttribute; })]
+	        }), 
+	        __metadata('design:paramtypes', [ionic_1.NavController])
+	    ], BasicPage);
+	    return BasicPage;
+	})();
+	exports.BasicPage = BasicPage;
 
 
 /***/ }
